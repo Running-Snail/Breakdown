@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:id="@+id/bd_indent_space"/>
+
+    <CheckBox
+        android:id="@+id/bd_item_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <EditText
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:inputType="text"
+        android:imeOptions="actionSend"
+        android:lines="1"
+        android:id="@+id/bd_item_str"/>
+
+    <ImageButton
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/left_arrow"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/bd_unindent"
+        android:contentDescription="unindent" />
+
+    <ImageButton
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/right_arrow"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/bd_indent"
+        android:contentDescription="indent" />
+
+</LinearLayout>
