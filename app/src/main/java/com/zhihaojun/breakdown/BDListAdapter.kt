@@ -88,7 +88,7 @@ class BDListAdapter(val mListView: ListView, val mRootItem: BDListItem, val mCon
     }
 }
 
-class BDListItemHolder(val mAdapter: BDListAdapter, val mListView: ListView, val mView: View, val mIdx: Int, val mIndent: Int, var mItem: BDListItem, val mContext: Context) : CompoundButton.OnCheckedChangeListener, TextView.OnEditorActionListener, View.OnKeyListener, View.OnClickListener, View.OnTouchListener {
+class BDListItemHolder(val mAdapter: BDListAdapter, val mListView: ListView, val mView: View, val mIdx: Int, val mIndent: Int, var mItem: BDListItem, val mContext: Context) : CompoundButton.OnCheckedChangeListener, TextView.OnEditorActionListener, View.OnKeyListener, View.OnClickListener {
     companion object {
         const val ITEM_INDENT = 30
         const val TAG = "BDListItemHolder"
@@ -105,7 +105,6 @@ class BDListItemHolder(val mAdapter: BDListAdapter, val mListView: ListView, val
         mSpace.layoutParams = LinearLayout.LayoutParams(dp2Px(mIndent * ITEM_INDENT), LinearLayout.LayoutParams.MATCH_PARENT)
         mEditText.text = SpannableStringBuilder(mItem.text())
         mEditText.setOnKeyListener(this)
-        mEditText.setOnTouchListener(this)
 
         // indent and unindent arrow
         mIndentBtn.setOnClickListener(this)
@@ -223,23 +222,6 @@ class BDListItemHolder(val mAdapter: BDListAdapter, val mListView: ListView, val
                 }
             }
         }
-    }
-
-    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-        mEditText.requestFocus()
-        val layout = (v as EditText).layout
-        if (event != null) {
-            val x = event.x.toInt()
-            val y = event.y.toInt()
-            if (layout != null) {
-                val line = layout.getLineForVertical(y)
-                val offset = layout.getOffsetForHorizontal(line, x.toFloat())
-                mEditText.setSelection(offset)
-            }
-        }
-        val imm = mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(v, InputMethodManager.SHOW_IMPLICIT)
-        return true
     }
 
     private fun dp2Px(dp: Int): Int {

@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp">
+    android:padding="10dp">
 
     <Space
         android:layout_width="1dp"
         android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
         android:id="@+id/bd_indent_space"/>
 
     <CheckBox
         android:id="@+id/bd_item_checkbox"
         android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_height="match_parent"/>
 
     <EditText
-        android:layout_gravity="center_vertical"
-        android:layout_width="wrap_content"
+        android:id="@+id/bd_item_str"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:inputType="text"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="-1dp"
         android:imeOptions="actionSend"
-        android:lines="1"
-        android:id="@+id/bd_item_str"/>
+        android:inputType="text"
+        android:lines="1" />
 
     <ImageButton
         android:layout_width="20dp"
