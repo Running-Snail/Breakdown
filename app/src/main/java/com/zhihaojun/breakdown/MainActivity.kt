@@ -32,45 +32,22 @@ class MainActivity : AppCompatActivity() {
         return filesDir.resolve(path)
     }
 
-    private fun buildFromJSON(data: BDStoreJSON): BDListItem {
-        var root = MemoryBDListItem(data.root.id, null, data.root.checked, data.root.text)
-
-        buildDFS(data.root, root)
-
-        return root
-    }
-
-    private fun buildDFS(itemData: BDStoreItemJSON, parent: BDListItem?) {
-        var item = MemoryBDListItem(itemData.id, parent, itemData.checked, itemData.text)
-        parent?.add(item)
-        for (childData in itemData.children) {
-            buildDFS(childData, item)
-        }
-    }
-
     fun itemsData() {
         var f = fileAt(STORE_FILE_LOCATION)
-        Log.i(TAG, f.absolutePath)
-        if (f.canRead()) {
-            var content = f.readText()
-            var gson: Gson = Gson()
-            var data: BDStoreJSON = gson.fromJson(content, BDStoreJSON::class.java) as BDStoreJSON
-            rootItem = buildFromJSON(data)
-        } else {
-            // create empty file
-            f.createNewFile()
+        Log.i(TAG, "data stored at " + f.absolutePath)
+        var serializer = BDJSONSerializer()
+        try {
+            rootItem = serializer.fromJSON(f)
+        } catch (e: Exception) {
+            Log.e(TAG, "serialize failed")
+            e.printStackTrace()
 
-            rootItem = MemoryBDListItem(BDListItemID.next(), null, false, "root")
-            rootItem?.add(MemoryBDListItem(BDListItemID.next(), rootItem, false, "Hi, There"))
+            // put default file
+            var defaultList = resources.openRawResource(R.raw.default_list)
+            var defaultContent = defaultList.bufferedReader().use { it.readText() }
+            f.writeText(defaultContent)
 
+            rootItem = serializer.fromJSON(defaultContent)
         }
     }
-}
-
-data class BDStoreJSON(var root: BDStoreItemJSON) {
-
-}
-
-data class BDStoreItemJSON(var children: List<BDStoreItemJSON>, var id: Long, var text: String, var checked: Boolean) {
-
 }

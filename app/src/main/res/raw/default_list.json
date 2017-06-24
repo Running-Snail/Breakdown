@@ -1,0 +1,22 @@
+{
+  "root": {
+    "id": 0,
+    "text": "root",
+    "checked": false,
+    "children": [
+      {
+        "id": 1,
+        "text": "Hi",
+        "checked": false,
+        "children": [
+          {
+            "id": 2,
+            "text": "there",
+            "checked": false,
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+}
