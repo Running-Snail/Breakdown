@@ -88,7 +88,7 @@ class BDListAdapter(val mListView: ListView, val mRootItem: BDListItem, val mCon
     }
 }
 
-class BDListItemHolder(val mAdapter: BDListAdapter, val mListView: ListView, val mView: View, val mIdx: Int, val mIndent: Int, var mItem: BDListItem, val mContext: Context) : CompoundButton.OnCheckedChangeListener, TextView.OnEditorActionListener, View.OnKeyListener, View.OnClickListener {
+class BDListItemHolder(val mAdapter: BDListAdapter, val mListView: ListView, val mView: View, val mIdx: Int, val mIndent: Int, var mItem: BDListItem, val mContext: Context) : CompoundButton.OnCheckedChangeListener, View.OnKeyListener, View.OnClickListener {
     companion object {
         const val ITEM_INDENT = 30
         const val TAG = "BDListItemHolder"
@@ -113,15 +113,6 @@ class BDListItemHolder(val mAdapter: BDListAdapter, val mListView: ListView, val
 
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
         mItem.check(isChecked)
-    }
-
-    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-        Log.i(TAG, "key code " + event?.keyCode)
-        if (event?.action != KeyEvent.ACTION_DOWN) {
-            return false
-        }
-
-        return false
     }
 
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
