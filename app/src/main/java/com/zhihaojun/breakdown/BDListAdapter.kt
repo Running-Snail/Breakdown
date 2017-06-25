@@ -113,6 +113,7 @@ class BDListItemHolder(val mAdapter: BDListAdapter, val mListView: ListView, val
 
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
         mItem.check(isChecked)
+        mAdapter.notifyDataSetChanged()
     }
 
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
@@ -177,6 +178,9 @@ class BDListItemHolder(val mAdapter: BDListAdapter, val mListView: ListView, val
     override fun onClick(v: View?) {
         if (v == mIndentBtn) {
             Log.i(TAG, "indent clicked")
+            // save text
+            mItem.setText(mEditText.text.toString())
+
             // get item above
             var parent: BDListItem? = mItem.parent()
             if (parent != null) {
@@ -196,6 +200,9 @@ class BDListItemHolder(val mAdapter: BDListAdapter, val mListView: ListView, val
             }
         } else if (v == mUnindentBtn) {
             Log.i(TAG, "unindent clicked")
+            // save text
+            mItem.setText(mEditText.text.toString())
+
             // get parent's parent
             var parent: BDListItem? = mItem.parent()
             if (parent != null) {
